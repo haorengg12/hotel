@@ -1,0 +1,19 @@
+{% extends "titleblock.html" %}
+
+{% block content %}{% load static %}
+  <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
+  <script type="text/javascript" src="static/js/jquery-ui.js"></script>
+  <script type="text/javascript"></script>
+<div id="reserve">
+    <div id="reserve_item">
+        <table id="my_reserve">
+                <tbody>
+                    <tr><th>订单日期</th><th>订单价格</th><th>订单状态</th></tr>
+                    <tr><td>11111</td><td> 11111</td><td>11111 </td><td id="number" style="display: none">11111</td></tr>
+                </tbody>
+            </table>
+    </div>
+</div>
+<link href="static/css/myreserve.css" type="text/css" rel="stylesheet" />
+<link href="static/css/jquery-ui.css" type="text/css" rel="stylesheet" />
+{%endblock%}

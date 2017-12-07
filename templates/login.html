@@ -1,0 +1,28 @@
+{% extends "titleblock.html" %}
+
+{% block content %}{% load static %}
+    <div id="loginbox">
+        <div id="image"><img id="qr" src='{% static "img/qr.png" %}'/></div>
+        <div class="login">
+            <img style="width: 100%;height: 20%" src="{% static "img/head.jpg" %}"/>
+				<form action="" method="post">
+				<div class="username">
+					<input placeholder="帐号" id="boxinput" name="id" />
+				</div>
+				<div class="password">
+					<input placeholder="密码" id="boxinput" name="pwd" type="password" />
+				</div>
+                <div id="button">
+						<input type="submit" id="sub" value="登录"/>
+				</div>
+
+{#					<a href="">找回密码</a>#}
+				</form>
+            <p style="color: brown; position: relative; bottom: 160px;font-size: 0.9em">扫描二维码关注我们的微信公众号！！！</p>
+			</div>
+
+    </div>
+
+    <link href='{% static "index.css" %}' type="text/css" rel="stylesheet" />
+    <link href='{% static "login.css" %}' type="text/css" rel="stylesheet" />
+{%endblock%}

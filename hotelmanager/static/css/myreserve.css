@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#main{
+    height:fit-content;
+}
+#reserve{
+    width: 80%;
+    height: 900px;
+    background-color: #454545;
+    margin: 0 auto;
+
+}
+#reserve_item{
+    width: 80%;
+    height: 100%;
+    background-color: #007fff;
+    margin: 0 auto;
+}
+
+#my_reserve{
+    border-collapse: collapse;
+    width: 80%;
+    background-color: #d4d4d4;
+    margin: 0 auto;
+    position: relative;
+    top: 30px;
+}
+th{
+    border-bottom: 1px solid #454545;
+}
+#my_reserve td{
+    line-height: 2em;
+    min-width: 24px;
+    border-bottom: 1px solid #454545;
+    padding: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    vertical-align: top;
+    text-align: center;
+    font-size: 1.2em;
+}

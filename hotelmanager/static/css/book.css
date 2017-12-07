@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#main{
+    height: 800px;
+}
+#book_main{
+    width:80%;
+    height: 800px;
+    margin: 0 auto;
+    background-image: url("https://cn.bing.com/az/hprichbg/rb/AberystwythSeafront_ZH-CN9542789062_1920x1080.jpg");
+}
+#find{
+    position: relative;
+    top: 40px;
+    width: 80%;
+    height: fit-content;
+    margin:  0 auto;
+}
+#in,#out{
+    width: 40%;
+    height:54px;
+    position: relative;
+    font-size: 1.6em;
+    color: #595757;
+}
+#search{
+    width: 18%;
+    height:57px;
+    position: relative;
+    font-size: 1.8em;
+    background-color: #9a2423;
+    color: whitesmoke;
+    border: #9a2423;
+}
+
+#kind{
+    width: 80%;
+    height: 144px;
+    margin: 0 auto;
+    background-color: rgba(255,255,255,0.5);
+    position: relative;
+    top:75px;
+}
+#kind>h3{
+    width: 20%;
+}
+#kind>div{
+    width:26%;
+    height:26px;
+    margin-left: 54px;
+    float: left;
+}
+#kind>div>p{
+    width:100px;
+    float:left;
+}
+input[type=checkbox]{
+    width: 20px;
+    height:20px;
+    margin-left:10px ;
+    margin-right: 10px;
+}
+#result{
+    width: 80%;
+    margin: 0 auto;
+    height: 522px;
+    background-color: rgba(0,0,0,0.8);
+    color:wheat;
+    position: relative;
+    top: 75px;
+}
+#room_num{
+    width: 80%;
+    height: 300px;
+    margin: 0 auto;
+    position: relative;
+    font-size: 1.5em;
+
+}
+#room_num > div{
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+}
+#room_num>div>p{
+    width: 150px;
+    position: absolute;
+    left: 30px;
+    float: left;
+}
+#room_num>div>span{
+    position: relative;
+    left: 174px;
+    font-size: 1.2em;
+}
+#room_num>div>input{
+    position: absolute;
+    left: 240px;
+    width: 82px;
+    height: 30px;
+    font-size: 0.6em;
+    border-radius: 18px;
+}
+#submit{
+    position: absolute;
+    right: 480px;
+    bottom: 50px;
+    width: 82px;
+    height: 39px;
+    font-size: 0.6em;
+    border-radius: 18px;
+}
+#cart{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 584px;
+    bottom: 50px;
+}
+#slide{
+    width: 34%;
+    height: 54%;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    position: absolute;
+    right: 32%;
+    top: 27%;
+    display: none;
+}
+#slide{
+    color: #595757;
+}
+
+#cartflag{
+    display: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}

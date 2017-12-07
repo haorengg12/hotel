@@ -1,0 +1,29 @@
+{% extends "titleblock.html" %}
+
+{% block content %}{% load static %}
+  <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
+  <script type="text/javascript" src="static/js/jquery-ui.js"></script>
+  <div id="info_main">
+    <div id="person_info">
+        <div id="photo">
+            <img src=""/>
+        </div>
+        <div id="info_item">
+            <p>昵称：</p>
+            <p>帐号：</p>
+            <p>默认身份证号：</p>
+        </div>
+    </div>
+
+    <div id="security">
+        <div style="position: relative;top: 60px;">
+            <div><p>登录密码</p><p>修改</p><p>点击修改可以修改登录密码</p></div>
+            <div><p>登录帐号</p><p>修改</p><p>点击修改可以修改用于登录的帐号</p></div>
+            <div><p>昵称</p><p>修改</p><p>点击修改可以修改昵称</p></div>
+            <div><p>默认身份证号：</p><p>修改</p><p>点击修改可以修改默认身份证号</p></div>
+        </div>
+    </div>
+  </div>
+<link href="static/css/myinfo.css" type="text/css" rel="stylesheet" />
+<link href="static/css/jquery-ui.css" type="text/css" rel="stylesheet" />
+{%endblock%}

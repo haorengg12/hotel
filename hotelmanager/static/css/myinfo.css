@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#main{
+    height: fit-content;
+}
+#info_main{
+    height: 900px;
+    width: 80%;
+    position: relative;
+    margin: 0 auto;
+    background-color: #595757;
+}
+#person_info{
+    height: 300px;
+    width: 80%;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+    background-color: #cccccc;
+}
+#photo{
+    height: 200px;
+    width: 200px;
+    background-color: #595757;
+    position: relative;
+    top: 30px;
+    left: 64px;
+    float: left;
+}
+#info_item{
+    height: 200px;
+    width: 600px;
+    background-color: #595757;
+    position: relative;
+    top: 30px;
+    left: 124px;
+    float: left;
+}
+#info_item > p{
+    width: 300px;
+    margin-top: 20px;
+}
+
+#security{
+    height: 300px;
+    width: 80%;
+    position: relative;
+    top: 40px;
+    margin: 0 auto;
+    background-color: #cccccc;
+}
+
+#security > div > div{
+    width:80%;
+    height:40px;
+    margin: 0 auto;
+    background-color: #9a2423;
+}
+#security > div > div >p{
+    width: 322px;
+    float: left;
+    position: relative;
+    left: 10px;
+}

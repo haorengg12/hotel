@@ -1,0 +1,29 @@
+{% extends "titleblock.html" %}
+
+{% block content %}{% load static %}
+  <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
+  <script type="text/javascript" src="static/js/jquery-ui.js"></script>
+  <script type="text/javascript">
+
+  </script>
+<div id="reserve">
+    <div id="re_item">
+        <div id = "room">
+            <table class="reference">
+                <tbody>
+                    <tr><th>房间类型</th><th>房间数量</th><th>价格</th></tr>
+                    <tr><td>单人标间:</td><td> </td><td> </td></tr>
+                    <tr><td>单人大床房:</td><td> </td><td> </td></tr>
+                    <tr><td>单人豪华房:</td><td></td><td></td></tr>
+                    <tr><td>双人标间:</td><td></td><td></td></tr>
+                    <tr><td>双人大床房:</td><td></td><td></td></tr>
+                    <tr><td>双人豪华房:</td><td></td><td> </td></tr>
+                </tbody>
+            </table>
+            <input id="pay" value="确认订单" type="button"/>
+        </div>
+    </div>
+</div>
+<link href="static/css/reserve.css" type="text/css" rel="stylesheet" />
+<link href="static/css/jquery-ui.css" type="text/css" rel="stylesheet" />
+{%endblock%}

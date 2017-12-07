@@ -1,0 +1,41 @@
+{% extends "titleblock.html" %}
+
+{% block content %}{% load static %}
+
+    <div style="height: 800px;" id = "up">{{alert}}
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/slideshow.js' %}"></script>
+    <div id="img" style="height: 800px;" >
+		<center><img id = "image1" width="80%" height="800px" src='{% static "img/slideshow/slideshow_1.jpg" %}'/></center>
+		<center><img id = "image2" width="80%" height="800px" style="display: none;" src='{% static "img/slideshow/slideshow_2.jpg" %}'/></center>
+        <center><img id = "image3" width="80%" height="800px" style="display: none;" src='{% static "img/slideshow/slideshow_3.jpg" %}'/></center>
+        <center><img id = "image4" width="80%" height="800px" style="display: none;" src='{% static "img/slideshow/sliideShow_4.jpg" %}'/></center>
+
+        <div id="select" style="right: 340px;">1</div>
+		<div style="right: 310px;">2</div>
+		<div style="right: 280px;">3</div>
+		<div style="right: 250px;">4</div>
+
+
+    </div>
+    </div>
+    <div style="height: 700px;" id="down">
+        <div style="width: 80%;height: 58px;background-color:rgba(0,0,0,0.4); margin: 0 auto">
+            <p style="font-size: 2.3em;text-align: center">*  &nbsp &nbsp *  &nbsp &nbsp *  &nbsp &nbsp *房&nbsp &nbsp间 &nbsp &nbsp  精 &nbsp &nbsp  选 &nbsp &nbsp  * &nbsp &nbsp  * &nbsp &nbsp  * &nbsp &nbsp  *</p>
+        </div>
+        <div id ="down_main" style="position:relative; width: 80%;height: 100%;margin: 0 auto;
+">
+
+            <div id="info_first"><img src="static/{{ img1 }}"/></div>
+            <div id="info_second"><img src="static/{{ img2 }}"/></div>
+            <div id="info_third"><img src="static/{{ img3 }}"/></div>
+            <div id="info_fourth"><img src="static/{{ img4 }}"/></div>
+            <div id="info_fifth"><img src="static/{{ img5 }}"/></div>
+            <div id="info_sixth"><img src="static/{{ img6 }}"/></div>
+        </div>
+    </div>
+
+    {% load static %}
+    <link href='{% static "index.css" %}' type="text/css" rel="stylesheet" />
+
+{%endblock%}
