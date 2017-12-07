@@ -17,18 +17,29 @@ def sighup_control(request):
     context = {}
 
     if not(re.match(r'^\d\d\d\d\d\d\d\d\d\d\d$', phone_num)):
-        info = "请输入11位手机号码"
+        context['info'] = "请输入11位手机号码"
         print("in match statement")
-        return HttpResponseRedirect("sighup?info="+info)
+        return render(request, "sighup.html", context)
 
     if pwd == pwd_:
-        print(pwd+"  "+pwd_)
-        cus = Customer(cus_phone=phone_num, cus_password=pwd)
-        cus.save()
-        success = "alert('注册成功')"
-        return HttpResponseRedirect("indexpage?success="+success)
-
+        if not(re.match(r'\S',pwd)):
+            context['info'] = "密码中不能包括空白字符"
+            return render(request, "sighup.html", context)
+        elif len(pwd) < 6:
+            context['info'] = "密码长度必须大于6"
+            return render(request, "sighup.html", context)
+        else:
+            cus = Customer(cus_phone=phone_num, cus_password=pwd)
+            cus.save()
+            print("成功")
+        return HttpResponseRedirect("index")
     else:
-        info = "密码输入不一致"
+        context['info'] = "密码输入不一致"
         print(pwd + "  " + pwd_)
-        return HttpResponseRedirect("indexpage?info=" + info)
+        return render(request, "sighup.html", context)
+
+
+def login_control(request):
+    phone_num = request.POST['phone']
+    pwd = request.POST['pwd']
+    return HttpResponseRedirect("index")
