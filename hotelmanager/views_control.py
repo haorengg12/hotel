@@ -22,7 +22,7 @@ def sighup_control(request):
         return render(request, "sighup.html", context)
 
     if pwd == pwd_:
-        if not(re.match(r'\S',pwd)):
+        if not(re.match(r'\S', pwd)):
             context['info'] = "密码中不能包括空白字符"
             return render(request, "sighup.html", context)
         elif len(pwd) < 6:
@@ -31,8 +31,9 @@ def sighup_control(request):
         else:
             cus = Customer(cus_phone=phone_num, cus_password=pwd)
             cus.save()
+            request.session['user'] = phone_num
             print("成功")
-        return HttpResponseRedirect("index")
+        return HttpResponseRedirect("indexpage")
     else:
         context['info'] = "密码输入不一致"
         print(pwd + "  " + pwd_)
@@ -42,4 +43,12 @@ def sighup_control(request):
 def login_control(request):
     phone_num = request.POST['phone']
     pwd = request.POST['pwd']
-    return HttpResponseRedirect("index")
+    context ={ }
+    if pwd == Customer.objects.get(cus_phone=phone_num).cus_password:
+        print(pwd)
+        request.session['user'] = phone_num
+        return HttpResponseRedirect("indexpage")
+    else:
+        print(Customer.objects.get(cus_phone=phone_num))
+        context['info'] = "用户名或密码不正确"
+        return render(request, "login.html", context)

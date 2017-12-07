@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>页面跳转</title>
+  {% load static %}
+  <script type="text/javascript" src="{% static 'js/jquery-2.1.0.js' %}"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+      count = 3;
+     $("span").text(count);
+
+     var timer = setInterval(function() {
+       count--;
+       $("span").text(count);
+       if(count==0)
+       {
+         window.location.href="indexpage";
+       }
+     },1000)
+
+
+  });
+  </script>
+</head>
+<body style="text-align: center;font-size: 3em;">
+    未登录，请先登录！<br/>
+    将在&nbsp&nbsp<span></span>&nbsp&nbsp后跳转到首页！
+</body>
+</html>
