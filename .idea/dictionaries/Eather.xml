@@ -9,6 +9,9 @@
       <w>loginbox</w>
       <w>myinfo</w>
       <w>myreserve</w>
+      <w>siglehigh</w>
+      <w>siglelow</w>
+      <w>siglemid</w>
     </words>
   </dictionary>
 </component>
