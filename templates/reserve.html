@@ -56,6 +56,15 @@
                 var input6 = $('<input type="text" name="book_phone"/>');
                 input6.attr("value",book_phone);
                 form.append(input6);
+
+                for(var i =1;i<=6;i++)
+                {
+                    var input = $('<input type="text" name="lv'+i+'"/>');
+                    var lv = $("td[id=price"+i+"]").prev().text();
+                    input.attr("value",lv);
+                    form.append(input);
+                }
+
                 form.submit();
 
             })
@@ -77,7 +86,7 @@
                     <tr><td>双人豪华房:</td><td>{{ dh}}</td><td id="price6">{{ double_high}} </td></tr>
                     <tr><td>请输入身份证号：</td><td><input style="width: 100%;height: 100%" id = "id_num" type="text" /></td></tr>
                     <tr><td>请输入手机号：</td><td><input style="width: 100%;height: 100%" id = "book_phone" type="text" /></td></tr>
-                    <tr><td id = "r_num">房间数量：<span></span></td><td id="all_price">总价：<span></span></span></td></tr>
+                    <tr><td id = "r_num">房间数量：<span></span></td><td id="all_price">总价：<span></span></td></tr>
                 </tbody>
             </table>
             <input id="pay" value="确认订单" type="button"/>

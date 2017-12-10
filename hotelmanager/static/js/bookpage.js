@@ -1,14 +1,14 @@
  $(document).ready(function(){
       $("#in").datepicker({
 
-                  dateFormat:"yy/mm/dd",
+                  dateFormat:"yy-mm-dd",
                   showButtonPanel:true,
                     minDate:-0
 
               });
       $("#out").datepicker({
 
-                    dateFormat:"yy/mm/dd",
+                    dateFormat:"yy-mm-dd",
                     showButtonPanel:true,
                     minDate:-0
               });

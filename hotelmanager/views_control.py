@@ -9,6 +9,7 @@ from hotelmanager.models import Customer
 from hotelmanager.models import Bookinfo
 from hotelmanager.models import Checkinfo
 import time
+from django.db import connection
 
 
 # Create your views here.
@@ -95,4 +96,16 @@ def check_reserve(request):
     bookinfo = Bookinfo(cus_id=cus_id, book_time=book_time, book_num=num, book_idnum=id_num, book_phone=book_phone,
                         book_price=price)
     bookinfo.save()
+    # 查询剩余房间
+    lv = ('std_low', 'std_mid', 'std_high', 'double_low', 'double_mid', 'double_high')
+    bookId = Bookinfo.objects.get(book_time=book_time).book_id
+    cursor = connection.cursor()
+    for i in range(6):
+        sql = "SELECT room_id FROM room WHERE room_id NOT IN ( SELECT room_id FROM checkinfo WHERE  check_checkInTime <= '" + datein + "'  and check_leavetime > '" + datein + "' ) AND room_level = '"+lv[i]+"'; "
+        result = cursor.execute(sql)
+        row = cursor.fetchall()
+        print(row[0])
+        check = Checkinfo(book_id=bookId, check_phone=book_phone, check_leavetime=dateout, check_checkintime=datein, check_statu='pre', room_id=row[0][0])
+        check.save()
+
     return HttpResponseRedirect("transition")
