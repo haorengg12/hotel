@@ -66,9 +66,11 @@ def reserve(request):
         context['dl'] = request.POST["dl"]
         context['dm'] = request.POST["dm"]
         context['dh'] = request.POST["dh"]
-
+        context['datein'] = request.POST["datein"]
+        context['dateout'] = request.POST["dateout"]
         price = Price.objects.all()
-        print(price)
+        for var in price:
+            context[var.room_level] = var.room_price
 
         return render(request, 'reserve.html', context)
 

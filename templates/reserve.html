@@ -4,26 +4,87 @@
   <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
   <script type="text/javascript" src="static/js/jquery-ui.js"></script>
   <script type="text/javascript">
+        $(document).ready(function() {
+            var num = 0;
+            var all_price = 0;
+            for(var i = 1;i<=6;i++)
+             {
+                var p = $("td[id=price"+i+"]").text();
 
+                p = parseFloat(p);
+
+                var price_num = parseFloat($("td[id=price"+i+"]").prev().text());
+                num+=price_num;
+                var ps = p * price_num;
+                $("td[id=price"+i+"]").text(ps);
+                all_price += ps;
+            }
+            $("#r_num > span").html(num);
+            $("#all_price > span").html(all_price);
+
+
+
+            $("#pay").click(function() {
+                var form = $('<form></form>');
+                form.append($("#main > input"));
+                form.attr('action','check_reserve');
+                form.attr('method','post');
+                form.attr('target','_self');
+                $("body").append(form);
+                var price = $("#all_price > span").text();
+                var input1 = $('<input type="text" name="price" />');
+                input1.attr("value",price);
+                form.append(input1);
+                var num = $("#r_num > span").text();
+                var input2 = $('<input type="text" name="num"/>');
+                input2.attr("value",num);
+                form.append(input2);
+
+                var datein = $("#in").val();
+                var input3 = $('<input type="text" name="datein"/>');
+                input3.attr("value",datein);
+                form.append(input3);
+                var dateout = $("#out").val();
+                var input4 = $('<input type="text" name="dateout"/>');
+                input4.attr("value",dateout);
+                form.append(input4);
+                var idnum = $("#id_num").val();
+                var input5 = $('<input type="text" name="id_num"/>');
+                input5.attr("value",idnum);
+                form.append(input5);
+                var book_phone = $("#book_phone").val();
+                var input6 = $('<input type="text" name="book_phone"/>');
+                input6.attr("value",book_phone);
+                form.append(input6);
+                form.submit();
+
+            })
+        });
   </script>
 <div id="reserve">
     <div id="re_item">
         <div id = "room">
+            <div><input id="in" value="{{ datein}}"/><input id="out" value="{{ dateout}}"/></div>
             <table class="reference">
                 <tbody>
                     <tr><th>房间类型</th><th>房间数量</th><th>价格</th></tr>
-                    <tr><td>单人标间:</td><td> {{ sl}}</td><td> </td></tr>
-                    <tr><td>单人大床房:</td><td> {{ sm}}</td><td> </td></tr>
-                    <tr><td>单人豪华房:</td><td>{{ sh}}</td><td></td></tr>
-                    <tr><td>双人标间:</td><td>{{ dl}}</td><td></td></tr>
-                    <tr><td>双人大床房:</td><td>{{ dm}}</td><td></td></tr>
-                    <tr><td>双人豪华房:</td><td>{{ dh}}</td><td> </td></tr>
+                    <--此处有bug，待修改-->
+                    <tr><td>单人标间:</td><td> {{ sl}}</td><td id="price1">{{std_low}} </td></tr>
+                    <tr><td>单人大床房:</td><td> {{ sm}}</td><td id="price2"> {{std_mid}}</td></tr>
+                    <tr><td>单人豪华房:</td><td>{{ sh}}</td><td id="price3">{{std_high}}</td></tr>
+                    <tr><td>双人标间:</td><td>{{ dl}}</td><td id="price4">{{ double_low}}</td></tr>
+                    <tr><td>双人大床房:</td><td>{{ dm}}</td><td id="price5">{{ double_mid}}</td></tr>
+                    <tr><td>双人豪华房:</td><td>{{ dh}}</td><td id="price6">{{ double_high}} </td></tr>
+                    <tr><td>请输入身份证号：</td><td><input style="width: 100%;height: 100%" id = "id_num" type="text" /></td></tr>
+                    <tr><td>请输入手机号：</td><td><input style="width: 100%;height: 100%" id = "book_phone" type="text" /></td></tr>
+                    <tr><td id = "r_num">房间数量：<span></span></td><td id="all_price">总价：<span></span></span></td></tr>
                 </tbody>
             </table>
             <input id="pay" value="确认订单" type="button"/>
         </div>
     </div>
 </div>
+{% csrf_token %}
 <link href="static/css/reserve.css" type="text/css" rel="stylesheet" />
 <link href="static/css/jquery-ui.css" type="text/css" rel="stylesheet" />
 {%endblock%}

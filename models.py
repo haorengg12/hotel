@@ -78,8 +78,8 @@ class AuthUserUserPermissions(models.Model):
 
 class Bookinfo(models.Model):
     book_id = models.AutoField(primary_key=True)
-    cus_id = models.IntegerField(blank=True, null=True)
     book_time = models.DateTimeField(blank=True, null=True)
+    cus_id = models.IntegerField(blank=True, null=True)
     book_idnum = models.CharField(max_length=18, blank=True, null=True)
     book_phone = models.CharField(max_length=11, blank=True, null=True)
     book_num = models.IntegerField(blank=True, null=True)
@@ -164,7 +164,8 @@ class DjangoSession(models.Model):
 
 
 class Price(models.Model):
-    room_level = models.CharField(max_length=11, blank=True, null=True)
+    id = models.IntegerField(blank=True, null=True)
+    room_level = models.CharField(primary_key=True, max_length=11)
     room_price = models.FloatField(blank=True, null=True)
 
     class Meta:

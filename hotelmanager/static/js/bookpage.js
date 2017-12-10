@@ -84,6 +84,9 @@
 
       });
       $("#submit").click(function () {
+            var datein =  $("#in").val();
+            var dateout =  $("#out").val();
+            console.log(datein);
             var form = $('<form></form>');
             form.append($("#main > input"));
             form.attr('action','reserve');
@@ -108,6 +111,13 @@
             var input6=$('<input type="text" name="dh"/>');
             input6.attr('value',dh_num);
             form.append(input6);
+            var input7=$('<input type="text" name="datein"/>');
+            input7.attr('value',datein);
+            form.append(input7);
+            var input8=$('<input type="text" name="dateout"/>');
+            input8.attr('value',dateout);
+            form.append(input8);
+
             form.submit();
 
       })

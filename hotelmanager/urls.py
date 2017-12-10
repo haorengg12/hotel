@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^control_login', views_control.login_control),
     url(r'^logout', views.loginout),
     url(r'^transition', views.transition),
-    url(r'^search_room',ajax_control.search_room),
+    url(r'^search_room', ajax_control.search_room),
+    url(r'^check_reserve', views_control.check_reserve),
 
 ]
