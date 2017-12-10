@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from hotelmanager.models import Price
-
+from hotelmanager.models import Bookinfo
+from hotelmanager.models import Checkinfo
+from hotelmanager.models import Customer
 # Create your views here.
 
 
@@ -83,6 +85,9 @@ def myreserve(request):
         context['login_URL'] = 'login'
         return HttpResponseRedirect("transition")
     else:
+        cus = Customer.objects.get(cus_phone=user)
+        book_info = Bookinfo.objects.filter(cus_id=cus.cus_id)
+        context['book_info'] = book_info
         context['login'] = '注销'
         context['login_URL'] = 'logout'
         return render(request, 'myreserve.html', context)
@@ -96,6 +101,11 @@ def myinfo(request):
         context['login_URL'] = 'login'
         return HttpResponseRedirect("transition")
     else:
+        cus = Customer.objects.get(cus_phone=user)
+        context['name'] = cus.cus_name
+        context['id_num'] = cus.id_num
+        context['cus_phone'] = cus.cus_phone
+
         context['login'] = '注销'
         context['login_URL'] = 'logout'
         return render(request, 'myinfo.html', context)

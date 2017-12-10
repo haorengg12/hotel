@@ -42,7 +42,7 @@ def sighup_control(request):
                 # 抛出异常，说明没有
                 cus = Customer(cus_phone=phone_num, cus_password=pwd)
                 cus.save()
-                cus_id = Customer.get(cus_phone=phone_num).cus_id
+                cus_id = Customer.objects.get(cus_phone=phone_num).cus_id
                 request.session['cus_id'] = cus_id
                 request.session['user'] = phone_num
                 print("成功")
@@ -104,8 +104,14 @@ def check_reserve(request):
         sql = "SELECT room_id FROM room WHERE room_id NOT IN ( SELECT room_id FROM checkinfo WHERE  check_checkInTime <= '" + datein + "'  and check_leavetime > '" + datein + "' ) AND room_level = '"+lv[i]+"'; "
         result = cursor.execute(sql)
         row = cursor.fetchall()
-        print(row[0])
-        check = Checkinfo(book_id=bookId, check_phone=book_phone, check_leavetime=dateout, check_checkintime=datein, check_statu='pre', room_id=row[0][0])
-        check.save()
+        print(row)
+        temp = i + 1
+        temp = str(i+1)
+        r_num = int(request.POST["lv"+temp])
+        print(r_num)
+        if r_num != 0:
+            for j in range(r_num):#此处需要考虑并发控制
+                check = Checkinfo(book_id=bookId, check_phone=book_phone, check_leavetime=dateout, check_checkintime=datein, check_statu='pre', room_id=row[j][0])
+                check.save()
 
     return HttpResponseRedirect("transition")

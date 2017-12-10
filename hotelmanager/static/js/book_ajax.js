@@ -48,6 +48,7 @@ $(document).ready(function()
                     $("#"+index).text(element);
 
 				});
+
 			},
 			error:function(){
 				alert("查询出错！");

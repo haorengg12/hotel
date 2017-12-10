@@ -3,24 +3,32 @@
 {% block content %}{% load static %}
   <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
   <script type="text/javascript" src="static/js/jquery-ui.js"></script>
+  <script type="text/javascript" src="static/js/myinfo.js"></script>
+  <script type="text/javascript" src="static/js/csrf.js"></script>
   <div id="info_main">
     <div id="person_info">
-        <div id="photo">
-            <img src=""/>
-        </div>
         <div id="info_item">
-            <p>昵称：</p>
-            <p>帐号：</p>
-            <p>默认身份证号：</p>
+            <p>昵称：<span id="#cus_name">{{ name}}</span></p>
+            <p>帐号：<span id="#cus_phone">{{ cus_phone}}</span></p>
+            <p>默认身份证号：<span id="id_num">{{ id_num}}</span></p>
         </div>
     </div>
 
     <div id="security">
+        <input style="width: 60px;height: 30px;background-color: whitesmoke" type="button" id="update" value="修改"/>
         <div style="position: relative;top: 60px;">
-            <div><p>登录密码</p><p>修改</p><p>点击修改可以修改登录密码</p></div>
-            <div><p>登录帐号</p><p>修改</p><p>点击修改可以修改用于登录的帐号</p></div>
-            <div><p>昵称</p><p>修改</p><p>点击修改可以修改昵称</p></div>
-            <div><p>默认身份证号：</p><p>修改</p><p>点击修改可以修改默认身份证号</p></div>
+
+            <div><span>登录密码：*****</span><p>点击修改可以修改登录密码</p></div>
+            <div><span>昵称：</span><span id="cus_name">{{ name}}</span><p>点击修改可以修改昵称</p></div>
+            <div><span>默认身份证号：</span><span id="id_num">{{ id_num}}</span><p>点击修改可以修改默认身份证号</p></div>
+            <p id="info" style="color: #9a2423"></p>
+        </div>
+        <div style="position: relative;top: 60px; display: none;">
+            <div><span>请输入新密码：</span><input type="password" id="pwd" name="pwd" value=""/></div>
+            <div><span>请输入新昵称：</span><input id="_cus_name" name="cus_name" value="{{ cus_name}}"/></div>
+            <div><span>请输入新身份证号：</span><input id="_id_num" name="id_num" value="{{ id_num}}"/></div>
+            <div><input type="button" id="ajax_update" value="确认"/></div>
+
         </div>
     </div>
   </div>

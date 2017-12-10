@@ -6,8 +6,8 @@
     height: fit-content;
 }
 #info_main{
-    height: 900px;
-    width: 80%;
+    height: 684px;
+    width: 55%;
     position: relative;
     margin: 0 auto;
     background-color: #595757;
@@ -20,23 +20,13 @@
     margin: 0 auto;
     background-color: #cccccc;
 }
-#photo{
-    height: 200px;
-    width: 200px;
-    background-color: #595757;
-    position: relative;
-    top: 30px;
-    left: 64px;
-    float: left;
-}
 #info_item{
     height: 200px;
-    width: 600px;
-    background-color: #595757;
+    width: 80%;
+    /*background-color: #595757;*/
     position: relative;
     top: 30px;
-    left: 124px;
-    float: left;
+    margin: 0 auto;
 }
 #info_item > p{
     width: 300px;
@@ -53,13 +43,20 @@
 }
 
 #security > div > div{
-    width:80%;
+    width:92%;
     height:40px;
     margin: 0 auto;
-    background-color: #9a2423;
+    /*background-color: #9a2423;*/
 }
 #security > div > div >p{
     width: 322px;
+    float: left;
+    position: relative;
+    left: 10px;
+    color: #454545;
+}
+#security > div > div >span{
+    width: 155px;
     float: left;
     position: relative;
     left: 10px;
