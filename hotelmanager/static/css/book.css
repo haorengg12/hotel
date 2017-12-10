@@ -139,3 +139,10 @@ input[type=checkbox]{
     width: 40px;
     height: 40px;
 }
+#slide > div{
+    height:24px;
+}
+#slide > div > p,#slide > div > span{
+    width: 140px;
+    float: left;
+}

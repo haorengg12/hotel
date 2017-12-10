@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-
+from hotelmanager.models import Price
 
 # Create your views here.
 
@@ -60,6 +60,16 @@ def reserve(request):
     else:
         context['login'] = '注销'
         context['login_URL'] = 'logout'
+        context['sl'] = request.POST["sl"]
+        context['sm'] = request.POST["sm"]
+        context['sh'] = request.POST["sh"]
+        context['dl'] = request.POST["dl"]
+        context['dm'] = request.POST["dm"]
+        context['dh'] = request.POST["dh"]
+
+        price = Price.objects.all()
+        print(price)
+
         return render(request, 'reserve.html', context)
 
 

@@ -32,22 +32,23 @@
         <div><p>双人标间：</p><span id="doublelow_num"></span><input type="button" value="加入购物车"/></div>
         <div><p>双人大床房：</p><span id="doublemid_num"></span><input type="button" value="加入购物车"/></div>
         <div><p>双人豪华房：</p><span id="doublehigh_num"></span><input type="button" value="加入购物车"/></div>
-        <img id="cartflag" src="static/img/cart.png"/>
+
     </div>
-    <img id="cart" src="static/img/cart.png"/><input id="submit" value="提交订单" type="button"/>
+    <img id="cartflag" src="static/img/cart.png"/><img id="cart" src="static/img/cart.png"/><input id="submit" value="提交订单" type="button"/>
       <div id="slide">
         <h3>购物车</h3>
-        <div><p>单人标间：</p><span id="siglelow_num"></span></div>
-        <div><p>单人大床房：</p><span id="siglemid_num"></span></div>
-        <div><p>单人豪华房：</p><span id="siglehigh_num"></span></div>
-        <div><p>双人标间：</p><span id="doublelow_num"></span></div>
-        <div><p>双人大床房：</p><span id="doublemid_num"></span></div>
-        <div><p>双人豪华房：</p><span id="doublehigh_num"></span></div>
+        <div><p>单人标间：</p><span id="sl"></span></div>
+        <div><p>单人大床房：</p><span id="sm"></span></div>
+        <div><p>单人豪华房：</p><span id="sh"></span></div>
+        <div><p>双人标间：</p><span id="dl"></span></div>
+        <div><p>双人大床房：</p><span id="dm"></span></div>
+        <div><p>双人豪华房：</p><span id="dh"></span></div>
       </div>
   </div>
 
 
 </div>
+{% csrf_token %}
 <link href="static/css/book.css" type="text/css" rel="stylesheet" />
 <link href="static/css/jquery-ui.css" type="text/css" rel="stylesheet" />
 {%endblock%}
