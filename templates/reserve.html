@@ -1,6 +1,9 @@
 {% extends "titleblock.html" %}
 
 {% block content %}{% load static %}
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
   <script type="text/javascript" src="static/js/jquery-ui.js"></script>
   <script type="text/javascript">
@@ -19,8 +22,8 @@
                 $("td[id=price"+i+"]").text(ps);
                 all_price += ps;
             }
-            $("#r_num > span").html(num);
-            $("#all_price > span").html(all_price);
+            $("#r_num").html(num);
+            $("#all_price").html(all_price);
 
 
 
@@ -73,20 +76,22 @@
 <div id="reserve">
     <div id="re_item">
         <div id = "room">
-            <div><input id="in" value="{{ datein}}"/><input id="out" value="{{ dateout}}"/></div>
-            <table class="reference">
+
+            <table class="table table-hover" id="book_reserve">
                 <tbody>
                     <tr><th>房间类型</th><th>房间数量</th><th>价格</th></tr>
                     <--此处有bug，待修改-->
-                    <tr><td>单人标间:</td><td> {{ sl}}</td><td id="price1">{{std_low}} </td></tr>
-                    <tr><td>单人大床房:</td><td> {{ sm}}</td><td id="price2"> {{std_mid}}</td></tr>
-                    <tr><td>单人豪华房:</td><td>{{ sh}}</td><td id="price3">{{std_high}}</td></tr>
-                    <tr><td>双人标间:</td><td>{{ dl}}</td><td id="price4">{{ double_low}}</td></tr>
-                    <tr><td>双人大床房:</td><td>{{ dm}}</td><td id="price5">{{ double_mid}}</td></tr>
-                    <tr><td>双人豪华房:</td><td>{{ dh}}</td><td id="price6">{{ double_high}} </td></tr>
-                    <tr><td>请输入身份证号：</td><td><input style="width: 100%;height: 100%" id = "id_num" type="text" /></td></tr>
-                    <tr><td>请输入手机号：</td><td><input style="width: 100%;height: 100%" id = "book_phone" type="text" /></td></tr>
-                    <tr><td id = "r_num">房间数量：<span></span></td><td id="all_price">总价：<span></span></td></tr>
+                    <tr><td>单人标间:</td><td> {{ sl}}{{lv1}}</td><td id="price1">{{std_low}} </td></tr>
+                    <tr><td>单人大床房:</td><td> {{ sm}}{{lv2}}</td><td id="price2"> {{std_mid}}</td></tr>
+                    <tr><td>单人豪华房:</td><td>{{ sh}}{{lv3}}</td><td id="price3">{{std_high}}</td></tr>
+                    <tr><td>双人标间:</td><td>{{ dl}}{{lv4}}</td><td id="price4">{{ double_low}}</td></tr>
+                    <tr><td>双人大床房:</td><td>{{ dm}}{{lv5}}</td><td id="price5">{{ double_mid}}</td></tr>
+                    <tr><td>双人豪华房:</td><td>{{ dh}}{{lv6}}</td><td id="price6">{{ double_high}} </td></tr>
+                    <tr><td>请输入身份证号：</td><td colspan="2"><input style="width: 100%;height: 100%" id = "id_num" type="text" /></td></tr>
+                    <tr><td>请输入手机号：</td><td colspan="2"><input style="width: 100%;height: 100%" id = "book_phone" type="text" /></td></tr>
+                    <tr><td colspan="3">入住时间：<input id="in" value="{{ datein}}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离开时间：  <input id="out" value="{{ dateout}}"/> </td></tr>
+                    <tr><td colspan="3">房间数量：<span id = "r_num"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总价：<span id="all_price"></span></tr>
+                    <span>{{info}}</span>
                 </tbody>
             </table>
             <input id="pay" value="确认订单" type="button"/>

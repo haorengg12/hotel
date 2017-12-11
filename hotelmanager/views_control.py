@@ -8,6 +8,7 @@ import re
 from hotelmanager.models import Customer
 from hotelmanager.models import Bookinfo
 from hotelmanager.models import Checkinfo
+from hotelmanager.models import Price
 import time
 from django.db import connection
 
@@ -83,6 +84,7 @@ def login_control(request):
 
 
 def check_reserve(request):
+    # 获取POST数据
     id_num = request.POST['id_num']
     book_phone = request.POST['book_phone']
     num = request.POST['num']
@@ -90,28 +92,53 @@ def check_reserve(request):
     datein = request.POST['datein']
     dateout = request.POST['dateout']
     cus_id = request.session['cus_id']
+    # --------
+    context = {}
     book_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-    print(book_time)
 
+    # 将POST数据复制到context字典中，用来进行容错控制
+
+    for k in request.POST.keys():
+        context[k] = request.POST[k]
+    # 将价格表放入context字典，用来进行容错控制
+    price_record = Price.objects.all()
+    for var in price_record:
+        context[var.room_level] = var.room_price
+    # -----------
+
+    # 正则验证身份证号码和手机号码
+    if not (re.match(r'^\d\d\d\d\d\d\d\d\d\d\d$', book_phone)):
+        context['info'] = "请输入11位手机号码"
+        print("in match statement")
+        return render(request, "reserve.html", context)
+    if not (re.match(r'^\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d$', id_num)):
+        context['info'] = "请输入18位身份证号码"
+        print("in match statement")
+        return render(request, "reserve.html", context)
+
+    # 将订单信息存入表单
     bookinfo = Bookinfo(cus_id=cus_id, book_time=book_time, book_num=num, book_idnum=id_num, book_phone=book_phone,
                         book_price=price)
     bookinfo.save()
+
     # 查询剩余房间
     lv = ('std_low', 'std_mid', 'std_high', 'double_low', 'double_mid', 'double_high')
     bookId = Bookinfo.objects.get(book_time=book_time).book_id
     cursor = connection.cursor()
     for i in range(6):
-        sql = "SELECT room_id FROM room WHERE room_id NOT IN ( SELECT room_id FROM checkinfo WHERE  check_checkInTime <= '" + datein + "'  and check_leavetime > '" + datein + "' ) AND room_level = '"+lv[i]+"'; "
-        result = cursor.execute(sql)
+        sql = "SELECT room_id FROM room WHERE room_id NOT IN ( SELECT room_id FROM checkinfo WHERE  check_checkInTime <= '" + datein + "'  and check_leavetime > '" + datein + "' ) AND room_level = '" + \
+              lv[i] + "'; "
+        cursor.execute(sql)
         row = cursor.fetchall()
         print(row)
-        temp = i + 1
-        temp = str(i+1)
-        r_num = int(request.POST["lv"+temp])
+        temp = str(i + 1)
+        r_num = int(request.POST["lv" + temp])
         print(r_num)
+        # 将入住表存入数据库
         if r_num != 0:
-            for j in range(r_num):#此处需要考虑并发控制
-                check = Checkinfo(book_id=bookId, check_phone=book_phone, check_leavetime=dateout, check_checkintime=datein, check_statu='pre', room_id=row[j][0])
+            for j in range(r_num):  # 此处需要考虑并发控制
+                check = Checkinfo(book_id=bookId, check_phone=book_phone, check_leavetime=dateout,
+                                  check_checkintime=datein, check_statu='pre', room_id=row[j][0])
                 check.save()
 
     return HttpResponseRedirect("transition")

@@ -9,7 +9,7 @@
     width:80%;
     height: 800px;
     margin: 0 auto;
-    background-image: url("https://cn.bing.com/az/hprichbg/rb/AberystwythSeafront_ZH-CN9542789062_1920x1080.jpg");
+    background-image: url(../../static/img/bgc.jpg);
 }
 #find{
     position: relative;

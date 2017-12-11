@@ -1,6 +1,13 @@
 {% extends "titleblock.html" %}
 
 {% block content %}{% load static %}
+    <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var width = $("#loginbox").css("width");
+      $("#foot").css({"width": width});
+    });
+</script>
     <div id="loginbox">
         <div id="image"><img id="qr" src='{% static "img/qr.png" %}'/></div>
         <div class="login">

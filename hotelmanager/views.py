@@ -70,6 +70,13 @@ def reserve(request):
         context['dh'] = request.POST["dh"]
         context['datein'] = request.POST["datein"]
         context['dateout'] = request.POST["dateout"]
+        flag = 0
+        for var in context:
+            if context[var] == '0':
+                flag = flag+1
+        if flag == 6:
+            context["alert"] = "1"
+            return render(request, 'bookpage.html', context)
         price = Price.objects.all()
         for var in price:
             context[var.room_level] = var.room_price

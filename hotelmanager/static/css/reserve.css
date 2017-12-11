@@ -17,17 +17,12 @@
     width: 80%;
     height: 80%;
     margin : 0 auto;
-    background-color: #007fff;
+    background-color: #aaaaaa;
 }
-table.reference{
-    border-collapse: collapse;
-    width: 80%;
-    background-color: #d4d4d4;
-    margin: 0 auto;
-    position: relative;
-    top: 30px;
+#book_reserve{
+
 }
-table.reference td {
+#book_reserve td {
     line-height: 2em;
     min-width: 24px;
     border: 1px solid #d4d4d4;
