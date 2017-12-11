@@ -1,78 +1,11 @@
 {% extends "titleblock.html" %}
 
 {% block content %}{% load static %}
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+	<script src="static/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
   <script type="text/javascript" src="static/js/jquery-ui.js"></script>
-  <script type="text/javascript">
-        $(document).ready(function() {
-            var num = 0;
-            var all_price = 0;
-            for(var i = 1;i<=6;i++)
-             {
-                var p = $("td[id=price"+i+"]").text();
-
-                p = parseFloat(p);
-
-                var price_num = parseFloat($("td[id=price"+i+"]").prev().text());
-                num+=price_num;
-                var ps = p * price_num;
-                $("td[id=price"+i+"]").text(ps);
-                all_price += ps;
-            }
-            $("#r_num").html(num);
-            $("#all_price").html(all_price);
-
-
-
-            $("#pay").click(function() {
-                var form = $('<form></form>');
-                form.append($("#main > input"));
-                form.attr('action','check_reserve');
-                form.attr('method','post');
-                form.attr('target','_self');
-                $("body").append(form);
-                var price = $("#all_price > span").text();
-                var input1 = $('<input type="text" name="price" />');
-                input1.attr("value",price);
-                form.append(input1);
-                var num = $("#r_num > span").text();
-                var input2 = $('<input type="text" name="num"/>');
-                input2.attr("value",num);
-                form.append(input2);
-
-                var datein = $("#in").val();
-                var input3 = $('<input type="text" name="datein"/>');
-                input3.attr("value",datein);
-                form.append(input3);
-                var dateout = $("#out").val();
-                var input4 = $('<input type="text" name="dateout"/>');
-                input4.attr("value",dateout);
-                form.append(input4);
-                var idnum = $("#id_num").val();
-                var input5 = $('<input type="text" name="id_num"/>');
-                input5.attr("value",idnum);
-                form.append(input5);
-                var book_phone = $("#book_phone").val();
-                var input6 = $('<input type="text" name="book_phone"/>');
-                input6.attr("value",book_phone);
-                form.append(input6);
-
-                for(var i =1;i<=6;i++)
-                {
-                    var input = $('<input type="text" name="lv'+i+'"/>');
-                    var lv = $("td[id=price"+i+"]").prev().text();
-                    input.attr("value",lv);
-                    form.append(input);
-                }
-
-                form.submit();
-
-            })
-        });
-  </script>
+  <script type="text/javascript" src="static/js/reserve.js"></script>
 <div id="reserve">
     <div id="re_item">
         <div id = "room">
@@ -89,7 +22,7 @@
                     <tr><td>双人豪华房:</td><td>{{ dh}}{{lv6}}</td><td id="price6">{{ double_high}} </td></tr>
                     <tr><td>请输入身份证号：</td><td colspan="2"><input style="width: 100%;height: 100%" id = "id_num" type="text" /></td></tr>
                     <tr><td>请输入手机号：</td><td colspan="2"><input style="width: 100%;height: 100%" id = "book_phone" type="text" /></td></tr>
-                    <tr><td colspan="3">入住时间：<input id="in" value="{{ datein}}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离开时间：  <input id="out" value="{{ dateout}}"/> </td></tr>
+                    <tr><td colspan="3">入住时间：<input style="color: #2b2b2b" id="in" value="{{ datein}}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离开时间：  <input style="color: #2b2b2b" id="out" value="{{ dateout}}"/> </td></tr>
                     <tr><td colspan="3">房间数量：<span id = "r_num"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总价：<span id="all_price"></span></tr>
                     <span>{{info}}</span>
                 </tbody>

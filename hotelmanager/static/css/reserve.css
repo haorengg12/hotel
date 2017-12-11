@@ -11,16 +11,19 @@
     width: 80%;
     height: 900px;
     margin:  0 auto;
-    background-color: #595757;
+    background:url(../../static/img/bgc.jpg);
 }
 #re_item{
     width: 80%;
     height: 80%;
     margin : 0 auto;
-    background-color: #aaaaaa;
+    background-color:  rgba(36, 0, 0, 0.6) ;
+    position: relative;
+    top: 60px;
 }
 #book_reserve{
-
+background-color:  rgba(255, 255, 255, 0.0) ;
+    color: whitesmoke;
 }
 #book_reserve td {
     line-height: 2em;
