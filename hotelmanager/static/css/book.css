@@ -43,25 +43,6 @@
     position: relative;
     top:75px;
 }
-#kind>h3{
-    width: 20%;
-}
-#kind>div{
-    width:26%;
-    height:26px;
-    margin-left: 54px;
-    float: left;
-}
-#kind>div>p{
-    width:100px;
-    float:left;
-}
-input[type=checkbox]{
-    width: 20px;
-    height:20px;
-    margin-left:10px ;
-    margin-right: 10px;
-}
 #result{
     width: 80%;
     margin: 0 auto;
@@ -73,7 +54,7 @@ input[type=checkbox]{
 }
 #room_num{
     width: 80%;
-    height: 300px;
+    height: 405px;
     margin: 0 auto;
     position: relative;
     font-size: 1.5em;

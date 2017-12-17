@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^search_room', ajax_control.search_room),
     url(r'^check_reserve', views_control.check_reserve),
     url(r'^update_myinfo', ajax_control.myinfo_update),
+    url(r'^all_check',ajax_control.all_check),
 
 ]
