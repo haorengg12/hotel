@@ -8,6 +8,7 @@ from django.views.decorators import csrf
 import re
 from hotelmanager.models import Customer
 from hotelmanager.models import Checkinfo
+from hotelmanager.models import Bookinfo
 from django.db import connection
 from datetime import datetime
 
@@ -84,3 +85,92 @@ def all_check(request):
 	# 将所定的房间个数也返回给前台页面
 	json_data[0] = i-1
 	return JsonResponse(json_data)
+
+
+def cus_search(request):
+	json_data = {}
+	if request.POST["flag"]=="name":
+		cus_name = request.POST["name"]
+		i=1
+		try:
+			Cus = Customer.objects.filter(cus_name__contains=cus_name)
+		except:
+			json_data[0] = 0
+		else:
+
+			for item in Cus:
+				json = {}
+				json["id"] = item.cus_id
+				json["name"]=item.cus_name
+				json["phone"]=item.cus_phone
+				json_data[i]=json
+				i += 1
+			json_data[0] = i-1
+	else:
+		cus_phone = request.POST["phone"]
+		i = 1
+		try:
+			Cus = Customer.objects.filter(cus_phone__contains=cus_phone)
+		except:
+			json_data[0] = 0
+		else:
+			for item in Cus:
+				json = {}
+				json["id"] = item.cus_id
+				json["name"] = item.cus_name
+				json["phone"] = item.cus_phone
+				json_data[i] = json
+				i += 1
+		json_data[0] = i - 1
+	return JsonResponse(json_data)
+
+
+def all_reserve(request):
+	json_data = {}
+	cus_id = request.POST["cus_id"]
+	try:
+		bookinfo = Bookinfo.objects.filter(cus_id=cus_id)
+	except:
+		json_data[0] = 0
+		return JsonResponse(json_data)
+	else:
+
+		i = 1
+		for item in bookinfo:
+			json = {}
+			json["book_id"] = item.book_id
+			json["book_time"] = item.book_time
+			json["book_price"] = item.book_price
+			json["book_num"] = item.book_num
+			json_data[i] = json
+			i += 1
+
+		# 将所定的房间个数也返回给前台页面
+		json_data[0] = i - 1
+		return JsonResponse(json_data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

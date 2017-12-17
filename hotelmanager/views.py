@@ -121,3 +121,7 @@ def myinfo(request):
 def transition(request):
     context = {}
     return render(request, 'transition.html', context)
+
+
+def staff(request):
+    return render(request,'staffblock.html')

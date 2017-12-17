@@ -1,0 +1,94 @@
+*{
+            margin: 0;
+            padding: 0;
+        }
+        #index_left{
+            height: 100%;
+            width: 20%;
+            background-color: #aaaaaa;
+            float: left;
+        }
+        #index_flag{
+            height: 112px;
+            width: 30%;
+            position: relative;
+            top: 25%;
+            left: 76%;
+        }
+        #index_flag > div{
+            height: 21px;
+            position: relative;
+            margin-top: 24px;
+            border-radius:0 10px 10px 0 ;
+            color: #333333;
+            text-decoration:none;
+            font-weight:bold;
+            cursor: pointer;
+        }
+        #main{
+            height: 100%;
+            width: 80%;
+            background-color: #cccccc;
+            float: left;
+        }
+        #main > div{
+            height:100%;
+            width: 100%;
+        }
+        #customer > #search{
+            width: 80%;
+            height: 12%;
+            margin: 0 auto;
+            position: relative;
+            top: 10%;
+
+        }
+        #customer > #search >div{
+            float: left;
+            margin-left: 104px;
+            margin-top: 10px;
+            font-size: 1.4em;
+        }
+        #name,#phone{
+            width: 320px;
+            height: 36px;
+            font-size: 1em;
+        }
+       #result{
+            width: 80%;
+            height: 78%;
+           background-color: #aaaaaa;
+            margin: 0 auto;
+            position: relative;
+            top: 10%;
+        }
+       #cus_list{
+           width: 100%;
+           height: 20%;
+           background-color: #3c763d;
+
+       }
+        #info,#cus{
+            width: 100%;
+            height: 100%;
+        }
+        #info>p{
+            margin-left: 120px;
+            font-size: large;
+            color: #333333;
+        }
+        #cus_item,#res_item{
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #d4d4d4;
+            margin: 0 auto;
+            position: relative;
+            top: 10%;
+        }
+        #res_list{
+            width: 100%;
+            height: 80%;
+            background-color: #66afe9;
+            margin: 0 auto;
+            position: relative;
+        }
