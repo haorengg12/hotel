@@ -7,9 +7,15 @@
   <script type="text/javascript" src="static/js/jquery-ui.js"></script>
   <script type="text/javascript" src="static/js/myreserve.js"></script>
    <script type="text/javascript" src="static/js/csrf.js"></script>
+
 <div id="reserve">
     <div id="reserve_item">
+        <div id="cancel">
+            <p>确认要删除或取消这条房间预约吗？</p>
+            <input type="button" id="yes" value="是的"/><input type="button" id="no" value="不！"/>
+        </div>
         <input id="back" type="button" value="返回" style="width: 50px;height: 30px;display: none"/>
+
         <table id="my_reserve" class="table table-hover">
                 <tbody>
                     <tr><th>订单号</th><th>订单日期</th><th>订单价格</th><th>订购数量</th></tr>
@@ -21,11 +27,13 @@
         </table>
         <table id="check_item" class="table table-hover" style="display: none">
                 <tbody>
-                    <tr><th>订单号</th><th>入住时间</th><th>离开时间</th><th>入住状态</th><th>房间号</th></tr>
+                    <tr><th>预约号</th><th>入住时间</th><th>离开时间</th><th>入住状态</th><th>房间号</th></tr>
 
                 </tbody>
         </table>
+
     </div>
+
 </div>
 <link href="static/css/myreserve.css" type="text/css" rel="stylesheet" />
 <link href="static/css/jquery-ui.css" type="text/css" rel="stylesheet" />

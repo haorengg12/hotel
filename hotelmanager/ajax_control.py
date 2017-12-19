@@ -11,7 +11,7 @@ from hotelmanager.models import Checkinfo
 from hotelmanager.models import Bookinfo
 from django.db import connection
 from datetime import datetime
-
+from hotelmanager.models import Room
 
 def search_room(request):
 	json_data = {}
@@ -150,25 +150,166 @@ def all_reserve(request):
 		return JsonResponse(json_data)
 
 
+def res_reserve(request):
+	json_data = {}
+	book_phone = request.POST["phone"]
+	try:
+		bookinfo = Bookinfo.objects.filter(book_phone__contains=book_phone)
+	except:
+		json_data[0] = 0
+		return JsonResponse(json_data)
+	else:
+
+		i = 1
+		for item in bookinfo:
+			json = {}
+			json["book_id"] = item.book_id
+			json["book_time"] = item.book_time
+			json["book_price"] = item.book_price
+			json["book_num"] = item.book_num
+			json_data[i] = json
+			i += 1
+
+		# 将所定的房间个数也返回给前台页面
+		json_data[0] = i - 1
+		return JsonResponse(json_data)
 
 
+def insert_check(request):
+	info={}
+	check_id = request.POST["check_id"]
+	name = request.POST["name"]
+	phone = request.POST["phone"]
+	idnum = request.POST["idnum"]
+	ctime = request.POST["ctime"]
+	ltime = request.POST["ltime"]
+	room_id = request.POST["room_id"]
+	statu = request.POST["statu"]
+
+	if name=="" or phone=="" or idnum=="" or ctime=="" or ltime=="" or room_id=="":
+		info["info"] = "0"
+	elif not (re.match(r'^\d\d\d\d\d\d\d\d\d\d\d$', phone)):
+		info["info"] = "0"
+	elif not (re.match(r'^\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d$', idnum)):
+		info["info"] = "0"
+	else:
+		checkinfo = Checkinfo.objects.filter(check_id=check_id).update(check_name=name,check_phone=phone,check_idnum=idnum,check_leavetime=ltime,check_checkintime=ctime,check_statu=statu,room_id = room_id)
+		info["info"]="1"
+	return JsonResponse(info)
 
 
+def get_room_by_id(request):
+	json_data = {}
+	room_id = request.POST["room_id"]
+	if room_id == "":
+		json_data[0] = 0
+	else:
+		cursor = connection.cursor()
+		sql = "select * from room_info WHERE room_id = '"+room_id+"';"
+		result = cursor.execute(sql)
+		row = cursor.fetchall()
+		print(row)
+		index = ["room_id","name","phone","ctime","ltime","check_id","book_id","statu","level","price"]
+		j=2
+		for item in row:
+			json = {}
+			for i in range(0,10):
+				json[index[i]] = item[i]
+			json_data[j] = json
+			j+=1
+		cursor.execute("COMMIT")
+		# print(row)
+		cursor.close()
+
+		json_data[0]=1
+		json_data[1]=j
+	return JsonResponse(json_data)
+
+def get_room_by_date(request):
+	json_data = {}
+	datein = request.POST["datein"]
+	dateout = request.POST["dateout"]
+	if datein=="" or dateout=="":
+		json_data[0] = 0
+	else:
+		cursor = connection.cursor()
+		sql = "SELECT * FROM room_info WHERE  check_checkInTime <= '" + dateout + "'  and check_leavetime > '" + datein + "';"
+		result = cursor.execute(sql)
+		row = cursor.fetchall()
+		index = ["room_id", "name", "phone", "ctime", "ltime", "check_id", "book_id", "statu", "level", "price"]
+		j = 2
+		for item in row:
+			# print(item)
+			json = {}
+			for i in range(0, 10):
+				json[index[i]] = item[i]
+			json_data[j] = json
+			j += 1
+
+		cursor.execute("COMMIT")
+		# print(row)
+		cursor.close()
+
+		json_data[0] = 1
+		json_data[1] = j
+	return JsonResponse(json_data)
 
 
+def add_room(request):
+	json_data={}
+
+	room_id = request.POST['room_id']
+	room_level = request.POST['room_level']
+
+	if room_id=="" or room_level=="" or len(room_id)!=3:
+		json_data["info"] = 0
+	else:
+		try:
+			room = Room.objects.get(room_id=room_id)
+		except:
+			#查询失败，数据库中不存在该房间号
+			add = Room(room_id=room_id,room_level=room_level)
+			add.save()
+			json_data["info"]=1
+		else:
+			room.room_id=room_id
+			room.room_level=room_level
+			room.save();
+			json_data["info"] = 1
+	return JsonResponse(json_data)
 
 
+def delete_room(request):
+	json_data={}
 
+	room_id = request.POST['room_id']
 
+	if room_id=="" or len(room_id)!=3:
+		json_data["info"] = 0
+	else:
+		try:
+			room = Room.objects.get(room_id=room_id)
+		except:
+			#查询失败，数据库中不存在该房间号
+			json_data["info"] = 0
+		else:
+			room.delete()
+			json_data["info"] = 1
+	return JsonResponse(json_data)
 
+def delete_check(request):
+	json_data={}
 
-
-
-
-
-
-
-
+	check_id = request.POST['check_id']
+	try:
+		check = Checkinfo.objects.get(check_id=check_id)
+	except:
+		#查询失败，数据库中不存在该房间号
+		json_data["info"] = 0
+	else:
+		check.delete()
+		json_data["info"] = 1
+	return JsonResponse(json_data)
 
 
 

@@ -7,6 +7,7 @@
 <script type="text/javascript">
 </script>
 <link rel="stylesheet" href="static/css/staff.css" type="text/css" />
+<link href="static/css/jquery-ui.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
 	<script src="static/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="static/js/jquery-2.1.0.js"></script>
@@ -15,7 +16,36 @@
   <script type="text/javascript" src="static/js/csrf.js"></script>
 </head>
 <body>
-<div style="height: 960px;width: 1600px;margin: 0 auto">
+<div id="blur"></div>
+<div id="room_update">
+    <div><span>房&nbsp;&nbsp;间&nbsp;&nbsp;号：</span><input id="add_room_id"/></div>
+    <div><span>房间等级：</span><select id="add_room_level">
+        <option value ="std_low">单人标准房</option><option value ="std_mid">单人大床房</option><option value="std_high">单人豪华房</option>
+        <option value ="double_low">双人标准房</option><option value ="double_mid">双人大床房</option><option value="double_high">双人豪华房</option>
+        </select></div>
+    <input type="button" id="add" value="确认添加"/>
+    <input type="button" id="delete" value="删除房间">
+    <input type="button" id="cancel" value="退出修改"/>
+</div>
+<div id="float" style="display: none">
+    <p id="check_id" style="display: none"></p>
+    <input style="left: 20px;top: 150px;" type="button" id="yes" value="确认"/><input style="top: 150px;right: 20px;" type="button" id="no" value="取消"/>
+    <p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<input id="f_name"/></p>
+    <p>身份证号：<input id="f_idnum"/></p>
+    <p>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：<input id="f_phone"/></p>
+    <p>入住时间：<input id="f_ctime"/></p>
+    <p>离开时间：<input id="f_ltime"/></p>
+    <p>入住状态：
+     <!---   <input id="f_statu"/>--->
+     <select id="f_statu">
+        <option value ="pre">未入住</option>
+      <option value ="ing">已入住</option>
+      <option value="after">订单完成</option>
+     </select>
+    </p>
+    <p>房&nbsp;&nbsp;间&nbsp;&nbsp;号：<input id="f_room_id"/></p>
+</div>
+<div style="background:url(../../static/img/left.jpg) ;height: 960px;width: 1600px;margin: 0 auto">
     <div id = "index_left">
         <div id="index_flag">
             <div id="mananger_cus" style="background-color: #d6e9c6;text-align: center">客户管理</div>
@@ -24,8 +54,8 @@
         </div>
     </div>
     <div id="main">
-        <div id="customer" style="background-color: #398439 ">
-
+        <div id="customer">
+            <div id="bg" style="background: url(../../static/img/costomer.jpeg);"></div>
             <div id="search">
                 <div><span>姓&nbsp;&nbsp;&nbsp;名：</span><input id="name" /></div>
                 <div><input type="button" id="start_name" style="width: 100px;height: 36px;background-color: #9a2423;font-size: 1em;color: whitesmoke;border: 0px"value="搜索"/></div>
@@ -36,6 +66,7 @@
             <div id="result">
                 <div id="cus_list">
                     <div id="cus" style="overflow: auto">
+                        <h3>查询结果</h3>
                         <table id="cus_item" class="table table-hover">
                         <tbody><tr><th>id</th><th>昵称</th><th>电话</th></tr></tbody>
 
@@ -49,6 +80,7 @@
                     </div>
                 </div>
                 <div id="res_list">
+                    <h3>订单信息</h3>
                     <table id="res_item" class="table table-hover">
                         <tr><th>订单号</th><th>订单日期</th><th>订单价格</th><th>订购数量</th></tr>
                     </table>
@@ -56,8 +88,51 @@
             </div>
         </div>
 
-        <div id="reserve" style="background-color: #5e5e5e;display: none"></div>
-        <div id="room" style="background-color: #2e6da4;display: none"></div>
+        <div id="reserve" style="background-color: #8a6d3b;display:none ;">
+            <div id="bg" style="background: url(../../static/img/reserve.jpeg);" ></div>
+            <div id="search_res">
+
+                <div><span>手机号：</span><input id="res_phone" /></div>
+                <div><input type="button" id="start_res_phone" style="width: 100px;height: 36px;background-color: #9a2423;font-size: 1em;color: whitesmoke;border: 0px"value="搜索"/></div>
+            </div>
+
+            <div id="res_table" >
+                <p style="font-size: 1.6em;font-weight: bold">订单信息</p>
+                <table id="reserve_item" class="table table-hover">
+                        <tr><th>订单号</th><th>订单日期</th><th>订单价格</th><th>订购数量</th></tr>
+                </table>
+            </div>
+            <div id="check_table" style="display: none">
+                <p style="font-size: 1.6em;font-weight: bold">顾客入住信息</p>
+                <table id="check_item" class="table table-hover" >
+                    <tbody>
+                        <tr><th>订单号</th><th>入住时间</th><th>离开时间</th><th>入住状态</th><th>房间号</th></tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div id="room" style="background-color: #2e6da4;display:none ">
+        <div id="bg" style="background: url(../../static/img/room.jpeg);"></div>
+            <div id="room_search">
+                <div><span>入住日期：</span><input id="start" /></div>
+                <div><span>离开日期：</span><input id="end" /></div>
+                <div><input type="button" id="get_room" style="width: 100px;height: 36px;"value="搜索"/></div>
+                <div style="width: 50%;"><span>房&nbsp;&nbsp;间&nbsp;&nbsp;号：<input style="height: 60%" id="room_id"/></span><input type="button" id="get_room_by_id" style="margin-left:70px;width: 100px;height: 36px;"value="搜索"/></div>
+                <div style="width: 50%;"><input type="button" id="update_room" style="margin-left:70px;width: 200px;height: 36px;"value="修改房间信息"/></div>
+            </div>
+            <div id="room_book" style="overflow: auto">
+                <p  style="font-size: 1.6em;font-weight: bold;color: black;margin-left: 90px">查询结果：</p>
+                <table id="room_item" class="table table-hover">
+                    <tbody>
+                        <tr><th>房间号</th><th>姓名</th><th>电话号</th><th>入住时间</th><th>离开时间</th><th>入住订单号</th><th>订单号</th><th>入住状态</th><th>房间类型</th><th>房间价格</th></tr>
+                    </tbody>
+                </table>
+                
+            </div>
+
+        </div>
     </div>
 </div>
 
