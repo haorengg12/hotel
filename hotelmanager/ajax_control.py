@@ -12,6 +12,7 @@ from hotelmanager.models import Bookinfo
 from django.db import connection
 from datetime import datetime
 from hotelmanager.models import Room
+from django.contrib.auth.hashers import make_password, check_password
 
 def search_room(request):
 	json_data = {}
@@ -53,10 +54,9 @@ def myinfo_update(request):
 		print(json_data)
 		return JsonResponse(json_data)
 	else:
-
-		# 抛出异常，说明没有
 		cus = Customer.objects.get(cus_id=request.session['cus_id'])
-		cus.cus_password = cus_pwd
+		pwd = make_password(cus_pwd)#密码加密
+		cus.cus_password = pwd
 		cus.cus_name = cus_name
 		cus.id_num = id_num
 		cus.save()

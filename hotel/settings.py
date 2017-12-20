@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'i4mbp!k16r*q5fe9wsh1%$)mw41+4ia*fh@zqi)%8ns6_m=22='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+# DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['eather.s1.natapp.cc', '127.0.0.1']
 
 
@@ -124,3 +124,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/Eather/SoftWare/static/'

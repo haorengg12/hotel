@@ -11,6 +11,7 @@ from hotelmanager.models import Checkinfo
 from hotelmanager.models import Price
 import time
 from django.db import connection
+from django.contrib.auth.hashers import make_password, check_password
 
 
 # Create your views here.
@@ -41,7 +42,9 @@ def sighup_control(request):
                 Customer.objects.get(cus_phone=phone_num).cus_phone
             except:
                 # 抛出异常，说明没有
-                cus = Customer(cus_phone=phone_num, cus_password=pwd)
+                pwd_s = make_password(pwd)#密码加密
+                print(pwd_s)
+                cus = Customer(cus_phone=phone_num, cus_password=pwd_s)
                 cus.save()
                 cus_id = Customer.objects.get(cus_phone=phone_num).cus_id
                 request.session['cus_id'] = cus_id
@@ -65,14 +68,15 @@ def login_control(request):
     context = {}
     try:
         pwd_query = Customer.objects.get(cus_phone=phone_num).cus_password
+        print(pwd_query)
 
     except:
         print("in login except")
         context['info'] = "帐号不存在"
         return render(request, "login.html", context)
     else:
-        if pwd == pwd_query:
-            print(pwd)
+        # print()pwd == pwd_query
+        if check_password(pwd,pwd_query):#密码校验
             cus_id = Customer.objects.get(cus_phone=phone_num).cus_id
             request.session['user'] = phone_num
             request.session['cus_id'] = cus_id
